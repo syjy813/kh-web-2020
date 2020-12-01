@@ -10,21 +10,44 @@
 	crossorigin="anonymous"></script>
 </head>
 <body>
-<%
-	String inc = "intro.jsp";
-	if(request.getParameter("inc") != null) {
+	<%
+		String inc = "intro.jsp";
+	if (request.getParameter("inc") != null) {
 		inc = request.getParameter("inc");
 	}
-%>
+
+	//sub
+	String sub = "./jquery/menu.jsp";
+	if (request.getParameter("sub") != null) {
+		sub = request.getParameter("sub");
+	}
+	%>
 	<div id='index'>
-		<header id='header'>헤더</header>
+		<header id='header'>
+			<nav id='nav'>
+				<ul>
+					<li><a href="index.jsp">HOME</a></li>
+					<li><a href="index.jsp?sub=./jquery/menu.jsp">JQUERY</a></li>
+					<li><a href="index.jsp?sub=./ajax/menu.jsp">AJAX</a></li>
+					<li><a href="index.jsp?sub=./mybatis/menu.jsp">MYBATIS</a></li>
+					<li><a href="index.jsp">방명록</a></li>
+					<li><a href="index.jsp">게시판</a></li>
+					<li><a href="index.jsp">회원관리</a></li>
+				</ul>
+			</nav>
+		</header>
+
 		<section id='contents'>
 			<article class='content'>
-				<jsp:include page="<%=inc %>"/>
+				<jsp:include page="<%=inc%>" />
 			</article>
 			<aside class='aside'>
 				<img alt="" src="http://placehold.it/150X100">
+				<div id="sub_menu">
+					<jsp:include page="<%=sub%>" />
+				</div>
 			</aside>
+
 		</section>
 		<footer id='footer'>융합 S/W 개발(주)</footer>
 	</div>
@@ -35,6 +58,9 @@
 
 		// 패딩의 증가의 영향을 최소화하기 위한 조치.
 		$('*').css('box-sizing', 'border-box');
+		$('a').css({
+			'text-decoration' : 'none'
+		})
 
 		//index 페이지의 너비와 중앙배치
 		$('#index').css('width', '800px');
@@ -44,7 +70,29 @@
 		$('#header').css('height', '150px');
 		$('#header').css('background-color', '#ccc');
 		$('#header').css('margin-top', '5px');
+		$('#header').css('position', 'relative');
 
+		// header > nav
+		$('#header > #nav').css({
+			'position' : 'absolute',
+			'right' : '5px',
+			'top' : '5px'
+		})
+		$('#header > #nav > ul').css({
+			'list-style' : 'none',
+		});
+		$('#header > #nav > ul > li').css({
+			'display' : 'inline-block',
+			'padding' : '3px',
+			'width' : '80px',
+			'text-align' : 'center',
+			'background-color' : '#99f',
+		});
+
+		$('#header > #nav > ul > li').first().css('border-radius',
+				'8px 0 0 8px');
+		$('#header > #nav > ul > li').last()
+				.css('border-radius', '0 8px 8px 0');
 		//content의 최소 높이만 설정
 		$('#index > #contents').css('min-height', '250px');
 
@@ -74,17 +122,27 @@
 
 		$('#index>#contents').css({
 			'margin-top' : '5px',
-			'margin-bottom' : '5px'
+			'margin-bottom' : '5px',
+			'min-height' : '650px'
 		});
 
 		$('#index>#contents>.content').css({
 			'width' : '650px',
-			'float' : 'left'
+			'float' : 'left',
+			'min-height' : '650px'
 		});
 
 		$('#index>#contents>.aside').css({
 			'width' : '150px',
 			'float' : 'right'
+		});
+
+		$('#index > #contents > .aside > #sub_menu').css({
+			'width' : '150px',
+		});
+		$('#index > #contents > .aside > #sub_menu > ol').css({
+			'margin-left' : '17px',
+
 		});
 	</script>
 </body>
