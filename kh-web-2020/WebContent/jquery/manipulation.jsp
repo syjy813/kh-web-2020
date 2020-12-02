@@ -11,24 +11,38 @@
 </head>
 <body>
 	<div id="main">
-		<div class="target">TARGET</div>
-		
+		<div id="target">TARGET</div>
+
 		<div class="dtn_zone">
 			<input type="button" value="WRAP" id="btnwrap" onclick="abc(this)" />
-			<input type="button" value="APPEND" id="btnappend" />
-			<input type="button" value="PREPEND" id="btnprepend" />
+			<input type="button" value="APPEND" id="btnappend" /> <input
+				type="button" value="PREPEND" id="btnprepend" />
 		</div>
 	</div>
 
+
 	<script>
 	function abc(button) {
-		alert("클릭클릭")
-	}
+		var request ="<label><input type='checkbox'>확인</label>";
+		for(var i = 0;i<5;i++) {
+			
+		$('#main > #target').wrap(request);
+		}
+		}
 	
 	var btnAppend = $('#btnappend')[0];
 	btnAppend.onclick = function() {
-		alert("Append 클릭")
+		var request ="<label><input type='checkbox'>확인</label>";
+		$('#main > #target').append(request);
 	};
+	
+	var btnPrepend = document.getElementById('btnprepend');
+	btnPrepend.onclick = function() {
+		var request ="<label><input type='checkbox'>확인</label>";
+		$('#main > #target').prepend(request);
+	}
+	
+	
 	</script>
 
 </body>
